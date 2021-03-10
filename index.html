@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Budzet domowy</title>
+</head>
+<body>
+    <main>
+        <section class="container">
+            <div class="logo"> <img src="/image/1c0d9d9a-e2c9-4c7c-af36-ece49414953a_200x2001.png" alt="logo of app"></div>
+            <div id="cash-balance"></div>
+            <div class="structure">
+                <div class="income">
+                    <p class="title">Przychody</p>
+                    <input type="text" id="name-of-income" placeholder="Nazwa przychodu"  />
+                    <input type="number" id="sum-of-income" placeholder="Kwota" />
+                    <button id="add-income" >Dodaj</button>
+                    <hr />
+                    <div id="list-of-incoms"></div>
+                    <p id="total-income-sum"> </p>
+                </div>
+                <div class="expenses">
+                    <p class="title">Wydatki</p>
+                    <input type="text" id="name-of-expenses" placeholder="Nazwa wydatku" >
+                    <input type="number" id="sum-of-expenses" placeholder="Kwota" >
+                    <button id="add-expenses">Dodaj</button>
+                    <hr />
+                    <div id="list-of-expenses"></div>
+                    <p id="total-expenses-sum"></p>
+                </div>
+            </div> 
+        </section> 
+    </main>    
+    <script src ="./scripts/script.js" async></script>
+</body>
+</html>
