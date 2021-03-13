@@ -36,6 +36,7 @@ button{
 }
 #cash-balance{
     border: 2px solid black;
+    border-radius: 10px;
     width: 400px;
     height: 100px; 
 }
@@ -45,13 +46,18 @@ button{
 .income{
     margin-top: 20px;
     border: 2px solid black;
-    height:100%;
-    
+    border-radius: 10px 0 0 10px;
+    height:100%;  
 }
 .expenses{
     margin-top: 20px;
     border: 2px solid black;
+    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
     height: 100%;  
+}
+hr{
+    border: 1px solid black;
 }
 
 #sum-of-income{
@@ -72,6 +78,7 @@ button{
 }
 .active{
     display: flex; 
+    font-weight: 900;
     font-size: 1.3rem; 
     justify-content: center;
     align-items: center;
@@ -93,5 +100,22 @@ button{
     }
     
 } 
-
+@media only screen and (max-width: 665px){
+    #add-income{
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+    #add-expenses{
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+} 
+@media only screen and (max-width: 630px){
+    .income{
+        border-radius: 10px;
+    }
+    .expenses{
+        border-radius: 10px;
+    }
+} 
 

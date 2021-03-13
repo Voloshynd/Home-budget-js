@@ -13,25 +13,43 @@ let incomArray =[];
 let expensesArray =[];
 
 //Filtruje tablie po usunienciu elementu o konkretnym id listy przychodow
-const BUTTON_DELETE_INCOME = document.querySelector('#deleteIncome')
+const BUTTON_DELETE_INCOME = document.querySelector('#deleteIncome');
 let lastIdIncome = 0;
 const deleteInc = (id) => {
     incomArray = incomArray.filter(v => v.id !== id);
-    document.querySelector(`li#income_${id}`).remove()
+    document.querySelector(`li#income_${id}`).remove();
     sumIncome();
 };
 
-// Tworzymy i dodaje nowy element li do listy przychodow 
+
+//Modyfikuje danne w tablice prychodow 
+const BUTTON_EDIT_INCOME = document.querySelector('#editIncome');
+const editInc = () =>{
+
+};
+
+
+
+
+// Tworzy i dodaje nowy element li do listy przychodow 
 const addIncomeLlst =(position)=>{    
     console.log(position)
     const li = document.createElement("li");   
     li.id = `income_${position.id}`; 
     li.innerHTML=`${position.description} - ${Math.abs(position.amount)} PLN
-        <div><button class="button-edit">Edytuj</button>
-        <button id="deleteIncome" class="remove-button" onclick="deleteInc(${position.id})">Usun</button></div>`;  
+        <div><button id="editIncome" onclick="editInc(${position})">Edytuj</button>
+        <button id="deleteIncome" onclick="deleteInc(${position.id})">Usun</button></div>`;  
         LIST_INCOME.appendChild(li);
         li.classList.add("flex");    
 }; 
+
+
+
+
+
+
+
+
 
 //Dodaje value z inputow przychodow
 const addIncome=()=>{
@@ -74,25 +92,25 @@ const sumIncome =()=>{
 };
 
 //Filtruje tablie po usunienciu elementu o konkretnym id z listy wydatkow
-const BUTTON_DELETE_EXPENSES = document.querySelector('#deleteExpenses')
+const BUTTON_DELETE_EXPENSES = document.querySelector('#deleteExpenses');
 let lastIdExpenses = 0;
 const deleteExp = (id) => {
     expensesArray = expensesArray.filter(v => v.id !== id);
-    document.querySelector(`li#expenses_${id}`).remove()
+    document.querySelector(`li#expenses_${id}`).remove();
     sumExpenses();
 };
 
 
    
 
-// Tworzymy i dodaje nowy element li do listy wydatkow
+// Tworzy i dodaje nowy element li do listy wydatkow
 const addExpensesList =(position)=>{   
     console.log(position) 
     const li = document.createElement("li"); 
     li.id = `expenses_${position.id}`;    
     li.innerHTML=`${position.description} - ${Math.abs(position.amount)} PLN
         <div><button class="button-edit">Edytuj</button>
-        <button id="deleteExpenses" class="remove-button"
+        <button id="deleteExpenses"
         onclick="deleteExp(${position.id})">Usun</button></div>`;  
         LIST_EXPENSES.appendChild(li);
         li.classList.add("flex");
