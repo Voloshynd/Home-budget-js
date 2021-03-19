@@ -21,35 +21,52 @@ const deleteInc = (id) => {
     sumIncome();
 };
 
+//Modyfikuje danne w tablice prychodow, edytuje dowolny element po wpisaniu danych do input-a "Nazwa przychodu" i "Kwota" i dokona zmiany po nacisnieciu przyciska edytuj obok wybranego elelmanta z listy. 
+const correctIncomePosition = (id) =>{
+    const BUTTON_EDIT_INCOME = document.querySelector("#buttonEditIncome");
+    const newIncomeNameValue = nameIncomeInput.value;
+    const newIncomeAmountValue = Number(amountIncomeInput.value);
+    let getItId = id; 
+    let eddiIncomeArray =[];
 
-//Modyfikuje danne w tablice prychodow 
-const BUTTON_EDIT_INCOME = document.querySelector('#editIncome');
-const editInc = () =>{
+    nameIncomeInput.style.borderColor ="";
+    amountIncomeInput.style.borderColor ="";
 
+    document.querySelector(`li#income_${id}`).innerHTML=`${newIncomeNameValue} - ${Math.abs(newIncomeAmountValue)} PLN<div> <button id="buttonEditIncome" onclick = "correctIncomePosition(${getItId})">Edytuj</button> <button id="deleteIncome" onclick="deleteInc(${getItId})">Usun</button></div>`; 
+
+    if(newIncomeNameValue && newIncomeAmountValue){
+        const newPosition = {
+            id: getItId,
+            description: newIncomeNameValue,
+            amount:Number(newIncomeAmountValue)
+        };
+        eddiIncomeArray.push(newPosition);
+    } else{
+        if(!newIncomeNameValue) nameIncomeInput.style.borderColor ="red";
+
+        if(!newIncomeAmountValue)  amountIncomeInput.style.borderColor ="red";
+    } 
+
+    nameIncomeInput.value = "";
+    amountIncomeInput.value = "";
+
+    incomArray = incomArray.map(x => {
+        const item = eddiIncomeArray.find(({ id }) => id === x.id);
+        return item ? item : x;
+      });
+     sumIncome();
 };
-
-
-
 
 // Tworzy i dodaje nowy element li do listy przychodow 
 const addIncomeLlst =(position)=>{    
-    console.log(position)
     const li = document.createElement("li");   
     li.id = `income_${position.id}`; 
     li.innerHTML=`${position.description} - ${Math.abs(position.amount)} PLN
-        <div><button id="editIncome" onclick="editInc(${position})">Edytuj</button>
+        <div> <button id="buttonEditIncome" onclick = "correctIncomePosition(${position.id})">Edytuj</button>
         <button id="deleteIncome" onclick="deleteInc(${position.id})">Usun</button></div>`;  
         LIST_INCOME.appendChild(li);
-        li.classList.add("flex");    
+        li.classList.add("flex"); 
 }; 
-
-
-
-
-
-
-
-
 
 //Dodaje value z inputow przychodow
 const addIncome=()=>{
@@ -66,7 +83,8 @@ const addIncome=()=>{
             amount:Number(incomeAmountValue)
         };
         incomArray.push(position);
-        addIncomeLlst(position)
+        addIncomeLlst(position);
+        // correctPosition(position);
         lastIdIncome++;
 
     } else{
@@ -76,9 +94,8 @@ const addIncome=()=>{
     } 
     nameIncomeInput.value = "";
     amountIncomeInput.value = "";
-    sumIncome();
+    sumIncome(); 
 };
-
 
 BUTTON_INCOME.addEventListener('click', addIncome);
 // Sumuje amount z tablicy przychodow
@@ -86,7 +103,7 @@ let totalIncome = 0;
 const sumIncome =()=>{
     let resultIncome = incomArray.reduce((prev, next) => 
     prev + next.amount, 0);
-    document.getElementById("total-income-sum").innerHTML = `<p>Suma przychodów: ${resultIncome}zł</p>`; 
+    document.getElementById("total-income-sum").innerHTML = `<p>Suma przychodów: ${resultIncome} zł</p>`; 
     totalIncome = resultIncome;
     availableFunds();
 };
@@ -100,22 +117,53 @@ const deleteExp = (id) => {
     sumExpenses();
 };
 
+//Modyfikuje danne w tablice wydatkow, edytuje dowolny element po wpisaniu danych do input-a "Nazwa przychodu" i "Kwota" i dokona zmiany po nacisnieciu przyciska edytuj obok wybranego elelmanta z listy. 
+const correctExpensePosition = (id) =>{
+    const BUTTON_EDIT_ESPENSE = document.querySelector("#buttonEditExpense");
+    const newExpenseNameValue =  nameExpensesInput.value;;
+    const newExpenseAmountValue = Number(amountExpensesInput.value);
+    let getItId = id; 
+    let eddiExpenseArray =[];
 
-   
+    nameExpensesInput.style.borderColor ="";
+    amountExpensesInput.style.borderColor ="";
+
+    document.querySelector(`li#expenses_${id}`).innerHTML=`${newExpenseNameValue} - ${Math.abs(newExpenseAmountValue)} PLN<div> <button id="buttonEditExpense" onclick="correctExpensePosition(${getItId})">Edytuj</button> <button id="deleteIncome" onclick="deleteInc(${getItId})">Usun</button></div>`; 
+
+    if(newExpenseNameValue && newExpenseAmountValue){
+        const newPosition = {
+            id: getItId,
+            description: newExpenseNameValue,
+            amount:Number(newExpenseAmountValue)
+        };
+        eddiExpenseArray.push(newPosition);
+    } else{
+        if(!newExpenseNameValue) nameExpensesInput.style.borderColor ="red";
+
+        if(!newExpenseAmountValue)  amountExpensesInput.style.borderColor ="red";
+    } 
+
+    nameExpensesInput.value = "";
+    amountExpensesInput.value = "";
+
+    expensesArray = expensesArray.map(x => {
+        const item = eddiExpenseArray.find(({ id }) => id === x.id);
+        return item ? item : x;
+      });
+      sumExpenses();
+};
 
 // Tworzy i dodaje nowy element li do listy wydatkow
-const addExpensesList =(position)=>{   
-    console.log(position) 
+const addExpensesList =(position)=>{    
     const li = document.createElement("li"); 
-    li.id = `expenses_${position.id}`;    
+    li.id = `expenses_${position.id}`;  
     li.innerHTML=`${position.description} - ${Math.abs(position.amount)} PLN
-        <div><button class="button-edit">Edytuj</button>
-        <button id="deleteExpenses"
-        onclick="deleteExp(${position.id})">Usun</button></div>`;  
+        <div> <button id = "buttonEditExpense" onclick = "correctExpensePosition(${position.id})">Edytuj</button> <button id="deleteExpenses" onclick="deleteExp(${position.id})">Usun</button></div>`;  
         LIST_EXPENSES.appendChild(li);
         li.classList.add("flex");
 };
-  //Dodaje value z inputow wydatkow
+
+//Dodaje value z inputow wydatkow
 const addExpenses=()=>{
     const expensesNameValue = nameExpensesInput.value;
     const expensesAmountValue = amountExpensesInput.value;
@@ -149,7 +197,7 @@ let totalExpense = 0;
 const sumExpenses =()=>{
     let resultExpenses = expensesArray.reduce((prev, next) => 
     prev + next.amount, 0);
-    document.getElementById("total-expenses-sum").innerHTML = `<p>Suma wydatków: ${resultExpenses}zł</p>`; 
+    document.getElementById("total-expenses-sum").innerHTML = `<p class ="">Suma wydatków: ${resultExpenses} zł</p>`; 
     totalExpense = resultExpenses;
     availableFunds();
 };
@@ -171,15 +219,5 @@ const availableFunds=()=>{
 };
 
 
-//Modyfikacja dannych, w polu nazwa pszuchodu i kwota wpisujesz nowe danne i nizej wybierasz jeden element z listy ktory chcesz zmodyfikowac, naciskasz przycisk udytuj i nowe danne wprowadzone 
-// function correctData(){
-//     let editButtons = document.querySelectorAll("li .button-edit");
-//     console.log(editButtons)
-//     for (let element of editButtons) {
-//        element.addEventListener('click', function() {
-//         li.innerHTML = `${nameIncomeInput.value} - ${amountIncomeInput.value} PLN<div><button class="button-edit">Edytuj</button> <button class="remove-button">Usun</button></div>`; 
-//        });
-//     }   
-// }
 
     

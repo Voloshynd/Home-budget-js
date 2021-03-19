@@ -1,10 +1,11 @@
 main{
     width: 100vw;
     height: 100vh;
-    background-image: url("/image/pexels-karol-d-325154.jpg");
+    background-image: url("/image/pexels-mateusz-dach-1055081.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;  
+       
 }
 .container{
     display: flex;
@@ -18,7 +19,7 @@ main{
 .title{
     color:black;
     margin: 5px;
-    font-size:1.2rem;
+    font-size:1.5rem;
     font-weight: bold;
 }
 p{
@@ -34,6 +35,10 @@ input{
 button{
     margin-right: 5px;
 }
+li{
+    font-size: 1rem;
+    font-weight: bold;
+}
 #cash-balance{
     border: 2px solid black;
     border-radius: 10px;
@@ -44,14 +49,15 @@ button{
     display: flex;
 }
 .income{
-    margin-top: 20px;
-    border: 2px solid black;
-    border-radius: 10px 0 0 10px;
     height:100%;  
+    margin-top: 20px;
+    border: 2.5px solid black;
+    border-radius: 10px 0 0 10px;
+    
 }
 .expenses{
     margin-top: 20px;
-    border: 2px solid black;
+    border: 2.5px solid black;
     border-radius: 10px;
     border-radius: 0 10px 10px 0;
     height: 100%;  
@@ -79,11 +85,23 @@ hr{
 .active{
     display: flex; 
     font-weight: 900;
-    font-size: 1.3rem; 
+    font-size: 2.0rem; 
     justify-content: center;
     align-items: center;
     color:black; 
     text-align: center;
+}
+#buttonEditIncome{
+    margin-left: 5px;
+}
+#buttonEditExpense{
+    margin-left: 5px;
+}
+#total-expenses-sum{
+    font-size: 1.2rem;
+}
+#total-income-sum{
+    font-size: 1.2rem;
 }
 @media only screen and (max-width: 630px){
     .structure{
